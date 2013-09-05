@@ -1,12 +1,9 @@
 clear
-%% Parameters
-fact = 5;
-imagename = 'car'
-
-%%
-a = imread(strcat('TestImages/',imagename,'.jpg'),'jpeg');
+a = imread('TestImages/dice.jpg','jpeg');
 [m,n,o] = size(a);
+fact = 8;
 newImage = zeros(m*fact,n*fact,o);
+
 for dim = 1:o
     for i = 1:m
         for j = 1:n
@@ -21,4 +18,4 @@ for dim = 1:o
     end
 end
 new_image = uint8(newImage);
-imwrite(new_image,strcat('OutputImages/',imagename,'_ZoomInReplication',num2str(fact),'.jpg'),'jpeg');
+imwrite(new_image,'OutputImages/dice_ZoomInReplication8.jpg','jpeg');
