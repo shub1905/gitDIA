@@ -1,7 +1,7 @@
 clear
 %% Parameters
 n = 2; %% The resulting image will nave 2^n colours
-imagename = 'dice'
+imagename = 'dice';
 
 %%
 a = imread(strcat('TestImages/',imagename,'.jpg'),'jpeg');
