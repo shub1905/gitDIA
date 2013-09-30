@@ -1,7 +1,7 @@
 clc
 clear
 %--------------parameters-------------------%
-inputImageName = 'kate';
+inputImageName = 'kerra';
 outputImageName = '_artification.jpg';
 yui = quantizationMedianCutDhruv(3,inputImageName);
 imageType = 'jpeg';

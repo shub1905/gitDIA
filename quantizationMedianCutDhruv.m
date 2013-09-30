@@ -42,6 +42,7 @@ end
 
 outputImage = inputImage;
 imwrite(outputImage,strcat('OutputImages/',imagename,'_QuantizationMedianCutDhruv',num2str(recursions_original),'.jpg'),'jpeg');
+A = outputImage;
 end
 
 function [A,cut,IX] = medianCut(A,IX,recursions)
