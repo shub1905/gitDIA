@@ -1,0 +1,12 @@
+function [image] = removeSeam(a,ag,al,seam,type)
+
+[m,n,o] = size(image);
+for i = 1:m
+    for j=seam(i):n-1
+        image(i,j,o) = image(i,j+1,o);
+    end
+end
+
+image(:,n,:) = [];
+
+end

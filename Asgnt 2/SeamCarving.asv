@@ -1,12 +1,18 @@
 a = imread('Test Image\Broadway_tower.png');
+
+for 
 ag = rgb2gray(a);
 filter = fspecial('laplacian');
 al = imfilter(ag,filter);
 [m,n] = size(al);
 [seam,energy] = findVerticalSeam(al);
+J=[2,3];
 for i=1:m
-    ag(i,
-
+    a(i,seam(i),1) = 255;
+    a(i,seam(i),J) = 0;
+end
+figure,imshow(a);
+a = removeSeam(a,seam,'V');
 % [m,n] = size(al);
 % aseam = double(al(:,:));
 % adire = zeros(m,n);

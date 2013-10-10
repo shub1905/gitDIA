@@ -2,20 +2,26 @@ a = imread('Test Image\Broadway_tower.png');
 ag = rgb2gray(a);
 filter = fspecial('laplacian');
 al = imfilter(ag,filter);
-[m,n] = size(al);
-[seam,energy] = findVerticalSeam(al);
-J=[2,3];
-for i=1:m
-    a(i,seam(i),1) = 255;
-    a(i,seam(i),J) = 0;
-end
 
+for tesla = 1:100
+    [m,n] = size(al);
+    [seam,energy] = findVerticalSeam(al);
+    J=[2,3];
+    for i=1:m
+        a(i,seam(i),1) = 255;
+        a(i,seam(i),J) = 0;
+    end
+%     figure,imshow(a);
+    [a,ag,al] = removeSeam(a,ag,al,seam,'V');
+%     figure,imshow(a);
+end
+figure,imshow(a);
 % [m,n] = size(al);
 % aseam = double(al(:,:));
 % adire = zeros(m,n);
 % dirArr = [-1,0,1];
 % % -1 go topleft 0 go top 1 g top right
-% 
+%
 % tstart = cputime();
 % for i=2:m
 %     for j=1:n
@@ -41,7 +47,7 @@ end
 % [val,ord] = sort(ser);
 % al2 = uint8(zeros(m,n));
 % J = ord(1:100);
-% 
+%
 % for i=m:-1:1
 %     al2(i,J) = 255;
 %     J = J + adire(i,J);
