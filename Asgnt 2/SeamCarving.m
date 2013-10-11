@@ -1,54 +1,45 @@
-a = imread('Test Image\Broadway_tower.png');
+% function [] = SeamCarving(m,n)
+a = imread('Test Image\Broadway_tower.jpg');
 ag = rgb2gray(a);
 filter = fspecial('laplacian');
 al = imfilter(ag,filter);
+[m,n,~] = size(a);
+n = n + 50;
+m = m - 40;
 
-for tesla = 1:100
-    [m,n] = size(al);
-    [seam,energy] = findVerticalSeam(al);
-    J=[2,3];
-    for i=1:m
-        a(i,seam(i),1) = 255;
-        a(i,seam(i),J) = 0;
-    end
-%     figure,imshow(a);
+while(size(a,2)>n)
+    [seam,~] = findVerticalSeam(al,1,1);
+%     a = markSeam(a,seam,'V');
     [a,ag,al] = removeSeam(a,ag,al,seam,'V');
-%     figure,imshow(a);
+end
+while(size(a,1)>m)
+    [seam,~] = findHorizontalSeam(al,1,1);
+%     a = markSeam(a,seam,'H');
+    [a,ag,al] = removeSeam(a,ag,al,seam,'H');
+end
+
+while size(a,1)<m
+    [p,~] = size(al);
+    p = randi(p,1,2);
+    pp = max(p);
+    tt = min(p);
+    
+    [seam,~] = findHorizontalSeam(al(tt:pp,:),1,1);
+    seam = seam + tt;
+    [a,ag,al] = extendSeam(a,al,ag,seam,'H');
+end
+
+while size(a,2)<n
+    [~,p] = size(al);
+    p = randi(p,1,2);
+    pp = max(p);
+    tt = min(p);
+    
+    [seam,~] = findVerticalSeam(al(:,tt:pp),1,1);
+    seam = seam + tt;
+    [a,ag,al] = extendSeam(a,al,ag,seam,'V');
 end
 figure,imshow(a);
-% [m,n] = size(al);
-% aseam = double(al(:,:));
-% adire = zeros(m,n);
-% dirArr = [-1,0,1];
-% % -1 go topleft 0 go top 1 g top right
-%
-% tstart = cputime();
-% for i=2:m
-%     for j=1:n
-%         if j > 1 && j<n
-%             [c,d] = sort([al(i-1,j-1),al(i-1,j),al(i-1,j+1)]);
-%             t = j + dirArr(d(1));
-%             aseam(i,j) = double(al(i,j)) + aseam(i-1,t);
-%             adire(i,j) = dirArr(d(1));
-%         elseif j == 1
-%             [c,d] = sort(al(i-1,1:2));
-%             aseam(i,j) = double(al(i,j)) + aseam(i-1,d(1));
-%             adire(i,j) = d(1) - 1;
-%         else
-%             [c,d] = sort([al(i-1,j-1),al(i-1,j)]);
-%             t = j + dirArr(d(1));
-%             aseam(i,j) = double(al(i,j)) + aseam(i-1,t);
-%             adire(i,j) = dirArr(d(1));
-%         end
-%     end
-% end
-% disp(cputime()-tstart);
-% ser = aseam(m,:);
-% [val,ord] = sort(ser);
-% al2 = uint8(zeros(m,n));
-% J = ord(1:100);
-%
-% for i=m:-1:1
-%     al2(i,J) = 255;
-%     J = J + adire(i,J);
+imwrite(a,['Output Images\Broadway_tower ',num2str(size(a,1))...
+    ,' ',num2str(size(a,2)),'.jpg']);
 % end
