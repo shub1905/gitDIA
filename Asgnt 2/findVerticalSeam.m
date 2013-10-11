@@ -13,7 +13,7 @@ end
 seam = ones(m,numSeam);
 js = Index(num:num+numSeam-1);
 energy = energy(num:num+numSeam-1);
-tp = size(js);
+tp = size(js,2);
 for p=1:tp
     j = js(p);
     for row = m-1:-1:1

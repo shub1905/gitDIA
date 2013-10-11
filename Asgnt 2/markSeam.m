@@ -8,7 +8,7 @@ function [ image ] = markSeam( image, seam, type )
         end
     else
         %Vertical seam
-        for i = 1:size(seam)
+        for i = 1:size(seam,1)
             image(i, seam(i,:), 1) = 255;
             image(i, seam(i,:), 2) = 0;
             image(i, seam(i,:), 3) = 0;
