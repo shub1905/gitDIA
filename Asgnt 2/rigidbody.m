@@ -3,8 +3,8 @@ clear
 imagename = 'eat';
 
 %% Read images
-inputimageAraw = double(imread(strcat('Test Images/',imagename,'1.jpg'),'jpeg'));
-inputimageBraw = double(imread(strcat('Test Images/',imagename,'3.jpg'),'jpeg'));
+inputimageAraw = double(imread(strcat('Test Image/',imagename,'1.jpg'),'jpeg'));
+inputimageBraw = double(imread(strcat('Test Image/',imagename,'2.jpg'),'jpeg'));
 inputimageAraw = inputimageAraw(:,:,1);
 inputimageBraw = inputimageBraw(:,:,1);
 
@@ -32,11 +32,14 @@ absfftB = abs(fftshift(fft2(inputimageB)));
 pcfftimageA = imgpolarcoord(absfftA);
 pcfftimageB = imgpolarcoord(absfftB);
 
+figure,imshow(mat2gray(log(pcfftimageA+1)));
+figure,imshow(mat2gray(log(pcfftimageB+1)));
+
 pcfftimageA = pcfftimageA(50:end,:); ... Low pass filter
 pcfftimageB = pcfftimageB(50:end,:); ... Low pass filter
 
-% figure,imshow(mat2gray(log(pcfftimageA+1)));
-% figure,imshow(mat2gray(log(pcfftimageB+1)));
+figure,imshow(mat2gray(log(pcfftimageA+1)));
+figure,imshow(mat2gray(log(pcfftimageB+1)));
 
 power_spectrum = (fft2(pcfftimageA).*conj(fft2(pcfftimageB)))./abs(fft2(pcfftimageA).*conj(fft2(pcfftimageB)));
 
