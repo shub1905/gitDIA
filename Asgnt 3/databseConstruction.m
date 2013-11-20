@@ -1,5 +1,5 @@
-dbDir = 'Database2';
-jpgFiles = dir([dbDir,'/*.jpg']);
+dbDir = 'Database';
+jpgFiles = dir([dbDir,'/*.png']);
 
 len = length(jpgFiles);
 database = zeros(128,128,3,len);
@@ -29,8 +29,8 @@ decompDatabase(decompDatabase<0) = -1;
 decompDatabase(1,:,:) = temp;
 save('decompDatabase');
 
-qDir = 'InputImages2';
-jpgFiles = dir([qDir,'/*.jpg']);
+qDir = 'InputImages';
+jpgFiles = dir([qDir,'/*.png']);
 
 len = length(jpgFiles);
 Qdatabase = zeros(128,128,3,len);
