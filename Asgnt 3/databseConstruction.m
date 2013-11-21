@@ -1,4 +1,5 @@
 dbDir = 'Database';
+qDir = 'InputImages';
 jpgFiles = dir([dbDir,'/*.png']);
 
 len = length(jpgFiles);
@@ -29,7 +30,6 @@ decompDatabase(decompDatabase<0) = -1;
 decompDatabase(1,:,:) = temp;
 save('decompDatabase');
 
-qDir = 'InputImages';
 jpgFiles = dir([qDir,'/*.png']);
 
 len = length(jpgFiles);
